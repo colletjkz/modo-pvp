@@ -26,13 +26,7 @@ local randomf = {
 
 }
 
-RegisterCommand("pistol",function(source,args,rawCommand)
-    local ped = PlayerPedId()
-    print('ola')
-    TriggerServerEvent("dimension")
-    SetEntityCoords(ped,2553.99,-366.95,93.0)
-    print('ola 3')
-end)
+
 
 RegisterCommand("lobby",function(source,args,rawCommand)
     local ped = PlayerPedId()
@@ -86,28 +80,7 @@ Citizen.CreateThread(function()
     end
 end)
 
---local pistolclick = {
- --   {-1841.47,-1199.59,14.31}
---}
 
---Citizen.CreateThread(function()
-    --while true do
-        --Wait(4)
-        --local coordPed = GetEntityCoords(PlayerPedId())
-        --local coords = vector3(-1841.47,-1199.59,14.31)
-        --local dist = #(coordPed - coords)
-        --if dist < 2 then
-            --for k,v in pairs(pistolclick) do
-                --drawTxt('PRESSIONE ~r~E ~w~ PARA  ~r~ZONE PISTOL', 4,0.5,0.96,0.45,255,255,255,255)
-               -- if IsControlJustPressed(0,38) then
-              --      print('teste')
-            --        TriggerServerEvent('dimension')
-          --          SetEntityCoords(PlayerPedId(),2553.99,-366.95,93.0)
-        --        end
-      --      end
-    --    end
-  --  end
---end)
 
 local fuzilclick = {
     {-1820.58,-1219.33,13.02}
