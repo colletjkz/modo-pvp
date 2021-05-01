@@ -8,7 +8,7 @@ vRPclient = Proxy.getInterface("vRP")
 ----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIAVEIS
 -----------------------------------------------------------------------------------------------------------------------------------------
-local handle
+local hff
 local toggleFly = false
 local inLobby = false
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -23,10 +23,10 @@ RegisterCommand('lobby',function()
 
     SetEntityCoords(ped,-1851.58,-1233.75,13.03+0.001,250.02+0.0001,1,0,0,1)
 
-    local handle = RegisterPedheadshot(PlayerPedId())
+    local hff = RegisterPedheadshot(PlayerPedId())
     Wait(200)
 
-    TriggerEvent("Notify",'aviso',"Lobby Manager:Seja bem-vindo novamente ao Lobby.")
+    TriggerEvent("Notify",'aviso',"Lobby ManagerSeja bem-vindo novamente ao Lobby.")
 
 
     FreezeEntityPosition(ped,false)
