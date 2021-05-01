@@ -1,9 +1,42 @@
 local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
 
-clgg = Tunnel.getInterface("bean-pvp")
+clgg = Tunnel.getInterface("juan-pvp")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Proxy.getInterface("vRP")
+
+----------------------------------------------------------------------------------------------------------------------------------------
+-- VARIAVEIS
+-----------------------------------------------------------------------------------------------------------------------------------------
+local handle
+local toggleFly = false
+local inLobby = false
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- LOBBYCOMMAND
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterCommand('lobby',function()
+    local ped = PlayerPedId()
+
+    local playerPed = GetPlayerPed(-1)
+    TriggerServerEvent('dimension')
+    RemoveAllPedWeapons(playerPed,false)
+
+    SetEntityCoords(ped,-1851.58,-1233.75,13.03+0.001,250.02+0.0001,1,0,0,1)
+
+    local handle = RegisterPedheadshot(PlayerPedId())
+    Wait(200)
+
+    TriggerEvent("Notify",'aviso',"Lobby Manager:Seja bem-vindo novamente ao Lobby.")
+
+
+    FreezeEntityPosition(ped,false)
+    SetCurrentPedWeapon(ped,GetHashKey("WEAPON_UNARMED"),true)
+    SetEntityHealth(ped,399)
+
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- CODE
+-----------------------------------------------------------------------------------------------------------------------------------------
 
 local random = {
     [1] = { ['x'] = 2503.7, ['y'] = -339.45, ['z'] = 92.75},
@@ -27,13 +60,6 @@ local randomf = {
 }
 
 
-
-RegisterCommand("lobby",function(source,args,rawCommand)
-    local ped = PlayerPedId()
-    TriggerServerEvent('dimension:lobby')
-    TriggerEvent('notify','aviso','Voltou para o lobby')
-    SetEntityCoords(ped,-1841.79,-1221.87,13.02)
-end)
 
 
 local pedlist = {
@@ -67,19 +93,16 @@ Citizen.CreateThread(function()
         local dist = #(coordPed - coords)
         if dist < 2 then
             for k,v in pairs(pistolclick) do
-                drawTxt('PRESSIONE ~r~E ~w~ PARA  ~r~ZONE PISTOL', 4,0.5,0.96,0.45,255,255,255,255)
+                drawTxt('PRESSIONE ~r~E ~w~ PARA  ~r~ZONA DA PISTOL', 4,0.5,0.96,0.45,255,255,255,255)
                 if IsControlJustPressed(0,38) then
-                    print('teste')
                     TriggerServerEvent('dimension')
                     selecionado = math.random(7)
                     SetEntityCoords(PlayerPedId(), random[selecionado].x,random[selecionado].y,random[selecionado].z)
-                   -- SetEntityCoords(PlayerPedId(),2553.99,-366.95,93.0)
                 end
             end
         end
     end
 end)
-
 
 
 local fuzilclick = {
@@ -94,7 +117,7 @@ Citizen.CreateThread(function()
         local dist = #(coordPeds - coordss)
         if dist < 2 then
             for k,v in pairs(fuzilclick) do
-                drawTxt('PRESSIONE ~r~E ~w~ PARA  ~r~ZONE FUZIL', 4,0.5,0.96,0.45,255,255,255,255)
+                drawTxt('PRESSIONE ~r~E ~w~ PARA  ~r~ZONA DE FUZIL', 4,0.5,0.96,0.45,255,255,255,255)
                 if IsControlJustPressed(0,38) then
                     print('teste')
                     TriggerServerEvent('dimension:fuzil')
@@ -104,19 +127,6 @@ Citizen.CreateThread(function()
             end
         end
     end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- SISTEMA DE ARMA
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("GivePedWeapon")
-AddEventHandler("GivePedWeapon", function()
-    local weapon = GetHashKey("WEAPON_PISTOL")
-    local weapon2 = GetHashKey("WEAPON_PISTOL_MK2")
-    local weapon3 = GetHashKey("WEAPON_COMBATPISTOL")
-    local ped = GetPlayerPed(PlayerId())
-    GiveWeaponToPed(ped, weapon, 10000, false, false)
-    GiveWeaponToPed(ped, weapon2, 10000, false, false)
-    GiveWeaponToPed(ped, weapon3, 10000, false, false)
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- DWTEXT
